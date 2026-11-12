@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101912"><title>VERDANT — Crónicas del valle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Verdant"><span class="brand-mark">✳</span><span>VERDANT<small>CRÓNICAS DEL VALLE</small></span></a>
+    <div class="world-meta"><span class="season-tag"><i></i> PRIMAVERA · AÑO <b id="year">1</b></span><span class="weather"><span id="weatherIcon">☀</span> <b id="weatherText">Despejado</b></span></div>
+    <div class="top-actions"><button class="icon-btn" id="soundBtn" title="Sonido">♫</button><button class="icon-btn" id="saveBtn" title="Guardar partida">⤓</button><button class="icon-btn" id="loadBtn" title="Cargar partida">⤒</button><button class="menu-btn" id="helpBtn">? <span>AYUDA</span></button></div>
+  </header>
+  <main class="layout">
+    <aside class="left-rail">
+      <section class="hero-card panel">
+        <div class="avatar-row"><div class="avatar" id="avatar">🧙</div><div><div class="eyebrow">VIAJERO/A</div><h2 id="heroName">Aventurero</h2><p id="heroRaceClass">Humano · Explorador</p></div><button class="edit-btn" id="characterBtn" title="Personaje">✎</button></div>
+        <div class="level-line"><span>NIVEL <b id="level">1</b></span><span><b id="xp">0</b> / <span id="nextXp">50</span> XP</span></div><div class="xp-track"><i id="xpBar"></i></div>
+        <div class="stats"><div class="stat"><span>♥</span><div class="stat-track"><i id="hpBar" class="hp-fill"></i></div><b id="hpText">100/100</b></div><div class="stat"><span>✦</span><div class="stat-track"><i id="staminaBar" class="stamina-fill"></i></div><b id="staminaText">100/100</b></div></div>
+        <div class="quick-stats"><span>⚔ <b id="attackStat">8</b> ATQ</span><span>◈ <b id="gold">12</b> MON</span><span>☘ <b id="rep">0</b> REP</span></div>
+      </section>
+      <section class="panel quest-panel"><div class="section-title"><span>DIARIO DE VIAJE</span><span class="tiny-count" id="questCount">01</span></div><div id="questList"></div><button class="text-action" id="newQuestBtn">＋ Buscar un encargo</button></section>
+      <section class="panel faction-panel"><div class="section-title"><span>REPUTACIÓN</span><button class="micro-btn" id="factionInfo">i</button></div><div class="faction-row"><span class="faction-icon grove">✿</span><span>Custodios del Robledal</span><b id="groveRep">0</b></div><div class="faction-row"><span class="faction-icon guild">⚒</span><span>Gremio de Brumaria</span><b id="guildRep">0</b></div><div class="faction-row"><span class="faction-icon wild">☾</span><span>Manada del Crepúsculo</span><b id="wildRep">0</b></div></section>
+      <section class="panel companion-panel"><div class="section-title"><span>COMPAÑERO</span><span class="online-dot"></span></div><div class="companion-content" id="companionCard"><div class="pet-emoji">🐈</div><div><b id="petName">Mora</b><small id="petMood">Curiosa · vínculo 1</small></div><button class="feed-btn" id="petBtn" title="Acariciar compañero">♡</button></div><div class="pet-bond"><i id="bondBar"></i></div></section>
+    </aside>
+    <section class="game-column">
+      <div class="game-heading"><div><div class="location-line"><span class="location-pin">⌖</span><div><h1 id="locationName">Claro del Alba</h1><p id="locationSub">Bosque de Linde · Valle de Brumaria</p></div></div></div><div class="time-box"><span class="time-icon" id="timeIcon">☼</span><span><small id="dayLabel">DÍA 1 · MAÑANA</small><b id="clock">08:00</b></span></div></div>
+      <div class="game-frame"><canvas id="gameCanvas" aria-label="Mundo de juego"></canvas>
+        <div class="canvas-top"><span class="zone-pill"><i></i> ZONA SEGURA</span><div class="mini-map" id="minimap"><div class="mini-player"></div></div></div>
+        <div class="toast" id="toast"></div>
+        <div class="interaction" id="interaction"><span id="interactIcon">✦</span><span id="interactText">Hablar</span><kbd>E</kbd></div>
+        <div class="controls-hint"><span>WASD / flechas <b>Mover</b></span><span><kbd>E</kbd> <b>Interactuar</b></span><span><kbd>ESPACIO</kbd> <b>Atacar</b></span></div>
+        <div class="mobile-pad"><button data-dir="up">▲</button><div><button data-dir="left">◀</button><button data-dir="down">▼</button><button data-dir="right">▶</button></div><button id="mobileAction">✦</button></div>
+        <div id="dialogue" class="dialogue hidden"><div class="dialogue-portrait" id="dialoguePortrait">🧑‍🌾</div><div class="dialogue-main"><div class="dialogue-head"><div><small id="dialogueRole">GUARDIANA DEL ROBLEDAL</small><h3 id="dialogueName">Elowen</h3></div><button id="closeDialogue">×</button></div><p id="dialogueText"></p><div id="dialogueChoices" class="dialogue-choices"></div></div></div>
+      </div>
+      <div class="bottom-bar"><div class="tool-slot active" data-tool="hand"><span>✋</span><small>MANO</small><kbd>1</kbd></div><div class="tool-slot" data-tool="axe"><span>🪓</span><small>HACHA</small><kbd>2</kbd></div><div class="tool-slot" data-tool="pickaxe"><span>⛏</span><small>PICO</small><kbd>3</kbd></div><div class="tool-slot" data-tool="sword"><span>⚔</span><small>ESPADA</small><kbd>4</kbd></div><div class="bar-divider"></div><button class="craft-quick" id="craftQuick"><span>⚒</span><span>FABRICAR<small> C · RECETAS</small></span></button><div class="bar-spacer"></div><div class="world-hint" id="worldHint">Explora el claro; Elowen tiene algo que contarte.</div><button class="map-btn" id="mapBtn">⌖ <span>MAPA</span></button></div>
+    </section>
+    <aside class="right-rail">
+      <nav class="tab-nav"><button class="tab active" data-tab="inventory">MOCHILA</button><button class="tab" data-tab="crafting">TALLER</button><button class="tab" data-tab="journal">MUNDO</button></nav>
+      <div class="tab-content" id="tab-inventory"><div class="inventory-head"><div><h2>Tu mochila</h2><small id="inventoryCount">6 / 24 espacios</small></div><button class="sort-btn" id="sortBtn">↕</button></div><div class="inventory-grid" id="inventoryGrid"></div><div class="selected-item" id="itemDetail"><div class="item-detail-icon">🍎</div><div><b>Selección</b><p>Elige un objeto para ver sus detalles.</p></div></div><div class="inventory-actions"><button class="soft-btn" id="useItemBtn">USAR</button><button class="soft-btn" id="dropItemBtn">SOLTAR</button></div><div class="equipment"><div class="section-title"><span>EQUIPO</span><span>ARMADURA <b id="armor">2</b></span></div><div class="equip-slots"><div><small>ARMA</small><span id="weaponSlot">🪵</span><b id="weaponName">Bastón</b></div><div><small>AMULETO</small><span>🪶</span><b>Pluma vieja</b></div></div></div></div>
+      <div class="tab-content hidden" id="tab-crafting"><div class="inventory-head"><div><h2>Taller de campo</h2><small>Recetas conocidas</small></div><span class="craft-icon">⚒</span></div><div class="recipe-list" id="recipeList"></div><div class="craft-note">Recolecta recursos con las herramientas adecuadas. Las recetas se descubren al explorar.</div></div>
+      <div class="tab-content hidden" id="tab-journal"><div class="inventory-head"><div><h2>Atlas del valle</h2><small>Un mundo en movimiento</small></div><span class="craft-icon">✧</span></div><div class="world-card"><div class="world-art">🌲<span>☁</span>🌿</div><b>Valle de Brumaria</b><p>Un rincón olvidado entre montañas, donde viejos pactos y nuevas raíces se entrelazan.</p></div><div class="world-facts"><div><span>✧</span><div><b>Descubrimientos</b><small id="discoveries">1 región</small></div></div><div><span>☾</span><div><b>Linaje</b><small id="lineage">Casa del Alba · generación 1</small></div></div><div><span>⌂</span><div><b>Hogar</b><small id="homeLevel">Refugio en el claro</small></div></div></div><button class="wide-btn" id="legacyBtn">✦ EL LEGADO DE MI CASA</button><button class="wide-btn secondary" id="buildBtn">⌂ MODO CONSTRUCCIÓN</button></div>
+    </aside>
+  </main>
+  <div class="mobile-footer"><button data-tab="inventory">▦<small>MOCHILA</small></button><button data-tab="crafting">⚒<small>TALLER</small></button><button data-tab="journal">✧<small>MUNDO</small></button><button id="mobileMenu">☰<small>MENÚ</small></button></div>
+</div>
+<div id="modalRoot"></div>
+<script src="game.js"></script>
+</body></html>
